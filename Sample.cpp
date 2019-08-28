@@ -1,8 +1,4 @@
 #include "Sample.h"
-#include <numeric>
-#include <cmath>
-#include <cstring>
-#include <string>
 #ifdef __GNUC__
 #include <boost/make_unique.hpp>
 #elif __MINGW32__

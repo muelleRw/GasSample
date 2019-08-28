@@ -1,9 +1,7 @@
 #ifndef SAMPLE_H
 #define SAMPLE_H
 #include <iostream>
-#include <vector>
-#include <map>
-#include <memory>
+
 #include "MolsData.h"
 
 class Sample

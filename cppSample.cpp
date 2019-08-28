@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include "Sample.h"
-#include "Units.h"
 
 int main()
 {
