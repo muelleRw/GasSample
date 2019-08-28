@@ -1,7 +1,8 @@
 #ifndef SAMPLE_H
 #define SAMPLE_H
 #include <iostream>
-
+#include <vector>
+//#include <memory>
 #include "MolsData.h"
 
 class Sample
@@ -29,9 +30,9 @@ class Sample
         double GetPB();
         double GetTB();
 
-        //void AdjustWater(const double& wv);
-        //void AdjustWater(const double& press, const double& temp);
-		//double GetWaterVapor(const double& press, const double& temp);
+        void AdjustWater(const double& wv);
+        void AdjustWater(const double& press, const double& temp);
+		double GetWaterVapor(const double& press, const double& temp);
 
         void SetBase(const double &press, const double &temp);
         //void SetGr(const double &gravity);

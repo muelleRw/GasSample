@@ -13,8 +13,8 @@ int main()
 		7.450,
 		4.390,
 		0.830,
-		1.080, 
-		0.310, 
+		1.080,
+		0.310,
 		0.250
 	};
 	mol.c6p(0.300);
@@ -31,5 +31,5 @@ int main()
 	std::cout << "\n\n";
 	std::cout << "BTU:" << x.GetBTUData() << std::endl;
 
-    std::cout << "Hello World!\n"; 
+    std::cout << "Hello World!\n";
 }

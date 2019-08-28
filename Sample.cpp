@@ -164,41 +164,108 @@ double Sample::ZSimple() {
 	MolsData summation = GetSummationData();
 	return 1.0 - (pb * pow(summation.TotalData(), 2));
 }
-/*
+
 void Sample::AdjustWater(const double& wv){
-    if(accum > 0.0){
-        if(mols[WATERPOSITION] == 0.0 && wv > 0.0){
-            accum += wv;
-            for(unsigned int i = 0; i < mols.size(); ++i){
-                mols[i] *= (1.0 - wv / 100.0);
-            }
-            mols[WATERPOSITION] = wv / 100.0;
-        } else if(mols[WATERPOSITION] > 0.0 && wv == 0.0){
-            accum -= mols[WATERPOSITION];
-            for(unsigned int i = 0; i < mols.size(); ++i){
-                mols[i] /= (1.0 - mols[WATERPOSITION]);
-            }
-            mols[WATERPOSITION] = 0.0;
+	double total_unnorm = unnorm_mols->TotalData();
+    if(total_unnorm > 0.0){
+        if(unnorm_mols->h2o == 0.0 && wv > 0.0){
+            total_unnorm += wv;
 
-        } else if(mols[WATERPOSITION] != 0.0 && wv > 0.0){
+            unnorm_mols->ch4 *= (1.0 - wv / 100.0);
+			unnorm_mols->n2 *= (1.0 - wv / 100.0);
+			unnorm_mols->co2 *= (1.0 - wv / 100.0);
+			unnorm_mols->c2h6 *= (1.0 - wv / 100.0);
+			unnorm_mols->c3h8 *= (1.0 - wv / 100.0);
+			unnorm_mols->ic4h10 *= (1.0 - wv / 100.0);
+			unnorm_mols->c4h10 *= (1.0 - wv / 100.0);
+			unnorm_mols->ic5h12 *= (1.0 - wv / 100.0);
+			unnorm_mols->c5h12 *= (1.0 - wv / 100.0);
+			unnorm_mols->c6h14 *= (1.0 - wv / 100.0);
+			unnorm_mols->c7h16 *= (1.0 - wv / 100.0);
+			unnorm_mols->c8h18 *= (1.0 - wv / 100.0);
+			unnorm_mols->c9h20 *= (1.0 - wv / 100.0);
+			unnorm_mols->c10h22 *= (1.0 - wv / 100.0);
+			unnorm_mols->h2 *= (1.0 - wv / 100.0);
+			unnorm_mols->o2 *= (1.0 - wv / 100.0);
+			unnorm_mols->co *= (1.0 - wv / 100.0);
+			unnorm_mols->h2s *= (1.0 - wv / 100.0);
+			unnorm_mols->he *= (1.0 - wv / 100.0);
+			unnorm_mols->ar *= (1.0 - wv / 100.0);
+			unnorm_mols->h2o = wv / 100.0;
+        } else if(unnorm_mols->h2o > 0.0 && wv == 0.0){
+			total_unnorm -= unnorm_mols->h2o;
+			unnorm_mols->ch4 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->n2 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->co2 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->c2h6 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->c3h8 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->ic4h10 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->c4h10 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->ic5h12 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->c5h12 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->c6h14 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->c7h16 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->c8h18 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->c9h20 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->c10h22 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->h2 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->o2 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->co /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->h2s /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->he /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->ar /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->h2o = 0.0;
+        } else if(unnorm_mols->h2o != 0.0 && wv > 0.0){
             //Zero out Water Mol
-            accum -= mols[WATERPOSITION];
-            for(unsigned int i = 0; i < mols.size(); ++i){
-                mols[i] /= (1.0 - mols[WATERPOSITION]);
-            }
-            mols[WATERPOSITION] = 0.0;
+			total_unnorm -= unnorm_mols->h2o;
+			unnorm_mols->ch4 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->n2 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->co2 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->c2h6 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->c3h8 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->ic4h10 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->c4h10 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->ic5h12 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->c5h12 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->c6h14 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->c7h16 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->c8h18 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->c9h20 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->c10h22 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->h2 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->o2 /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->co /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->h2s /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->he /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->ar /= (1.0 - unnorm_mols->h2o);
+			unnorm_mols->h2o = 0.0;
             //Add in wv
-            accum += wv;
-            for(unsigned int i = 0; i < mols.size(); ++i){
-                mols[i] *= (1.0 - wv / 100.0);
-            }
-            mols[WATERPOSITION] = wv / 100.0;
+			total_unnorm += wv;
+
+			unnorm_mols->ch4 *= (1.0 - wv / 100.0);
+			unnorm_mols->n2 *= (1.0 - wv / 100.0);
+			unnorm_mols->co2 *= (1.0 - wv / 100.0);
+			unnorm_mols->c2h6 *= (1.0 - wv / 100.0);
+			unnorm_mols->c3h8 *= (1.0 - wv / 100.0);
+			unnorm_mols->ic4h10 *= (1.0 - wv / 100.0);
+			unnorm_mols->c4h10 *= (1.0 - wv / 100.0);
+			unnorm_mols->ic5h12 *= (1.0 - wv / 100.0);
+			unnorm_mols->c5h12 *= (1.0 - wv / 100.0);
+			unnorm_mols->c6h14 *= (1.0 - wv / 100.0);
+			unnorm_mols->c7h16 *= (1.0 - wv / 100.0);
+			unnorm_mols->c8h18 *= (1.0 - wv / 100.0);
+			unnorm_mols->c9h20 *= (1.0 - wv / 100.0);
+			unnorm_mols->c10h22 *= (1.0 - wv / 100.0);
+			unnorm_mols->h2 *= (1.0 - wv / 100.0);
+			unnorm_mols->o2 *= (1.0 - wv / 100.0);
+			unnorm_mols->co *= (1.0 - wv / 100.0);
+			unnorm_mols->h2s *= (1.0 - wv / 100.0);
+			unnorm_mols->he *= (1.0 - wv / 100.0);
+			unnorm_mols->ar *= (1.0 - wv / 100.0);
+			unnorm_mols->h2o = wv / 100.0;
         }
-
-        ZSimple();
-
     } else{
-        std::cout << "Mols not Set -- Unable to add Water Vapor\n";
+        std::cout << "Unable to add Water Vapor\n";
     }
 }
 
@@ -207,14 +274,14 @@ void Sample::AdjustWater(const double& press, const double& temp){
 }
 
 
-double Sample::GetWaterVapor(const double& press, const double& temp){
-    double a = exp(k1 - (k2 / (k3 + temp)));
-    double b = exp(k4 - (k5 / (k6 + temp)));
-    //press must be in psia -- with true atmospheric
-    double w = (a / press + b) * pb / WVPRESSUREBASE;
-    return w * RMULT / pb * (RANKINE + tb) / MILLION / MWATER;
+double Sample::GetWaterVapor(const double& press, const double& temp) {
+	double a = exp(k1 - (k2 / (k3 + temp)));
+	double b = exp(k4 - (k5 / (k6 + temp)));
+	//press must be in psia -- with true atmospheric
+	double w = (a / press + b) * pb / WVPRESSUREBASE;
+	return w * RMULT / pb * (RANKINE + tb) / MILLION / MWATER;
 }
-*/
+
 
 double Sample::GetZAir(){
     return zair;
